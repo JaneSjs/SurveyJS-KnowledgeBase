@@ -1,7 +1,4 @@
----
-title: How to answer a survey offline
-last_updated: 2025-07-31
----
+# How to answer a survey offline
 
 ## Question
 
@@ -26,3 +23,4 @@ Once you receive the filled PDF:
 
 ## Tags
 offline, pdf, export, fillable-forms
+---
