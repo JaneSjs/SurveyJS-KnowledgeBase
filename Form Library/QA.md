@@ -232,10 +232,11 @@ survey.onChoicesLazyLoad.add((_, options) => {
    });   
  }
 });
-
+```
 #lazy-loading #api-integration #search-dropdown #debounce
 ---
-## Adding Tooltip Feature for Survey Questions
+
+## Add Tooltip Feature for Survey Questions
 
 ### Question
 How to add a tooltip feature with a toggle icon next to question titles that can be configured in SurveyJS Creator?
