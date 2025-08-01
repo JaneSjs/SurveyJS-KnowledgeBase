@@ -141,3 +141,64 @@ survey.onStarted.add((sender, options) => {
 #timer #countdown
 
 ---
+## Making Matrix Rows Required in SurveyJS
+
+### Question
+How to create a multi-select matrix question where each row is required to be answered?
+
+### Answer
+To ensure that respondents answer all rows in a Multi-Select Matrix, enable the [`MatrixDropdownColumn.isRequired`](https://surveyjs.io/form-library/documentation/api-reference/multi-select-matrix-column-values#isRequired) option for each matrix column. 
+
+```
+{
+  "pages": [
+    {
+      "name": "page1",
+      "elements": [
+        {
+          "type": "matrixdropdown",
+          "name": "serviceSatisfaction",
+          "title": "Please rate your satisfaction with the following aspects in each department:",
+          "columns": [
+            {
+              "name": "Staff Helpfulness",
+              "title": "Staff Helpfulness",
+              "cellType": "rating",
+              "isRequired": true,
+              "rateType": "stars",
+              "rateCount": 3,
+              "rateMax": 3,
+              "minRateDescription": "Very Poor",
+              "maxRateDescription": "Excellent"
+            },
+            {
+              "name": "Response Time",
+              "title": "Response Time",
+              "cellType": "rating",
+              "isRequired": true,
+              "rateType": "stars",
+              "rateCount": 3,
+              "rateMax": 3,
+              "minRateDescription": "Very Poor",
+              "maxRateDescription": "Excellent"
+            }
+          ],
+          "rows": [
+            {
+              "value": "salesDept",
+              "text": "Sales Department"
+            },
+            {
+              "value": "supportDept",
+              "text": "Support Department"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+```
+Respondents will require provide a response in every row for each required column.
+
+![Multi-Select Rating Matrix with required rows](./images/multiselect-matrix-all-rows-required.png)
