@@ -1,3 +1,12 @@
+## Entry Title
+### Question
+...
+### Answer
+...
+### Tags
+...
+---
+
 # How to answer a survey offline
 
 ## Question
@@ -21,6 +30,110 @@ Once you receive the filled PDF:
 - You can manually enter the answers into your system
 - Or programmatically parse the PDF using tools like: pdf-lib, PDF.js.
 
-## Tags
+#### Tags
 offline, pdf, export, fillable-forms
+---
+## Set countdown for a question
+### Question
+How to set a countdown on a certain question? For example, this question needs to be answered in 60 seconds
+
+### Answer
+
+To enable a timer for individual questions, place each question to a separate page and configure the [`PageModel.timeLimit`](https://surveyjs.io/form-library/documentation/api-reference/page-model#timeLimit)  property for an individual page. Once the time expires, a user will be automatically moved to the next page.
+
+[View Demo](https://plnkr.co/edit/6C1XC85RfmhezFWV)
+```
+{
+ "title": "Sample Quiz", 
+ "showTimerPanel": "top",
+ "showTimerPanelMode": "page",
+ "pages": [
+  {
+   "name": "page1",
+   "elements": [
+    {
+     "type": "html",
+     "name": "question1",
+     "html": "Now, we are ready to start!"
+    }
+   ]
+  },
+  {
+   "name": "page2",
+   "maxTimeToFinish": "60",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "question2",
+     "choices": [
+      "Item 1",
+      "Item 2",
+      "Item 3"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "page3",
+   "maxTimeToFinish": "0",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "question3",
+     "choices": [
+      "Item 1",
+      "Item 2",
+      "Item 3"
+     ]
+    }
+   ]
+  },
+  {
+   "name": "page4",
+   "maxTimeToFinish": "0",
+   "elements": [
+    {
+     "type": "radiogroup",
+     "name": "question4",
+     "choices": [
+      "Item 1",
+      "Item 2",
+      "Item 3"
+     ]
+    }
+   ]
+  }
+ ],
+ "firstPageIsStarted": true
+}
+```
+However, in this mode, pages which do no contain time limits, the timer still appears. If you wish to completely remove the timer, conditionally start and stop the timer when a user switches between survey pages. 
+[View Demo](https://plnkr.co/edit/4uFJM3PP2CJGbDqK)
+In this demo, the time limit is enabled for specific form pages (`page2`, `page3`, `page4`). Other survey pages contain instructions. Implement the [`survey.onCurrentPageChanged`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#onCurrentPageChanged) and [`survey.onStarted`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#onStarted) functions to stop a timer when the current survey page doesn't contain a time limit and start the timer when a page contains a time limit. To prevent users from moving backward, disable the Previous navigation button using the [`survey.showPrevButton`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#showPrevButton) property.
+```js
+survey.showPrevButton = false;
+function stopTimer(surveyModel){
+       surveyModel.stopTimer();
+};
+function startTimer(surveyModel){
+        surveyModel.startTimer();
+};
+survey.onCurrentPageChanged.add((sender, options) => {
+         if(sender.currentPage.timeLimit === 0){
+            stopTimer(sender);
+        } else {
+            startTimer(sender);
+        }
+});
+survey.onStarted.add((sender, options) => {
+         if(sender.currentPage.timeLimit === 0){
+            stopTimer(sender);
+        } else {
+            startTimer(sender);
+        }
+});
+```
+
+### Tags
+timer, countdown
 ---
