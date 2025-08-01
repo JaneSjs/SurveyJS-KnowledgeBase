@@ -1,22 +1,13 @@
 # How to limit a custom component to one instance and make its name read-only
 ## Question
 
-Can I add a custom component only once and prevent users from changing its name?
+Can I add a certain question or a custom component only once and prevent users from changing its name?
 
 ## Answer
 
-Yes — you can hide the `name` property to make it read-only, and use Survey Creator events to ensure the component:
-
-- Can only be added once
-- Is always named consistently
-- Re-enables itself if deleted
-
-Here’s a code example:
-
+To ensure that a question can only be added once, implement the [`creator.onQuestionAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onQuestionAdded) function and call the [`creator.toolbox.removeItem(questionType)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#removeItem) function to remove your custom template from a list of available element types. Within the `onQuestionAdded` function, you may also define the name of a newly added question.
+Additionally, if you load an existing survey, check whether the survey contains the specified question entry. If it does, disable the toolbox item.
 ```js
-// Make the 'name' property hidden in the property grid
-Serializer.getProperty('uniquewidget', 'name').visible = false;
-
 // Disable the toolbox item if the widget already exists when loading
 creator.onSurveyInstanceCreated.add((sender, options) => {
   if (options.area === 'designer-tab') {
@@ -49,5 +40,9 @@ creator.onElementDeleting.add((sender, options) => {
     }
   }
 });
+```
+To make a question's `name` property read-only, implement the  [`creator.onPropertyGetReadOnly`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyGetReadOnly) function.
+
+```js
 ```
 ---
