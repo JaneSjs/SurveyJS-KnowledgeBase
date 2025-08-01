@@ -66,3 +66,29 @@ creator.onPropertyGetReadOnly.add((sender, options) => {
 })
 ```
 ---
+
+## Setting Default Locale for SurveyJS Creator and Survey
+
+### Question
+How do I set the default locale for SurveyJS Creator (Editor) and Survey to German?
+
+### Answer
+To change the UI locale of SurveyJS Creator to German, set the `creator.locale` property:
+
+```javascript
+creator.locale = "de";
+```
+To change the default locale for all surveys created in the editor (so German text becomes the fallback instead of English), modify the `defaultLocale` setting:
+```
+import { surveyLocalization } from "survey-core";
+
+surveyLocalization.defaultLocale = "de";
+```
+With this configuration, all German survey texts will be saved under the "default" key, and survey editors can still translate to other languages using the Translation tab or by changing the current survey locale.
+
+See also:
+
+* [Form Library: Localization](https://surveyjs.io/form-library/documentation/survey-localization)
+* [Creator: Localization](https://surveyjs.io/survey-creator/documentation/survey-localization-translate-surveys-to-different-languages)
+
+#localization #internationalization #creator-settings #default-locale

@@ -112,7 +112,9 @@ To enable a timer for individual questions, place each question to a separate pa
 }
 ```
 However, in this mode, pages which do no contain time limits, the timer still appears. If you wish to completely remove the timer, conditionally start and stop the timer when a user switches between survey pages. 
+
 [View Demo](https://plnkr.co/edit/4uFJM3PP2CJGbDqK)
+
 In this demo, the time limit is enabled for specific form pages (`page2`, `page3`, `page4`). Other survey pages contain instructions. Implement the [`survey.onCurrentPageChanged`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#onCurrentPageChanged) and [`survey.onStarted`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#onStarted) functions to stop a timer when the current survey page doesn't contain a time limit and start the timer when a page contains a time limit. To prevent users from moving backward, disable the Previous navigation button using the [`survey.showPrevButton`](https://surveyjs.io/form-library/documentation/api-reference/survey-data-model#showPrevButton) property.
 ```js
 survey.showPrevButton = false;
