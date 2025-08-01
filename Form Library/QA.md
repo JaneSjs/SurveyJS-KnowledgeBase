@@ -233,7 +233,9 @@ survey.onChoicesLazyLoad.add((_, options) => {
  }
 });
 ```
+
 #lazy-loading #api-integration #search-dropdown #debounce
+
 ---
 
 ## Add Tooltip Feature for Survey Questions
