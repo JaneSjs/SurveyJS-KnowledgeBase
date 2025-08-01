@@ -1,19 +1,22 @@
 ## Entry Title
+
 ### Question
 ...
+
 ### Answer
 ...
-### Tags
-...
+
+#tag1 #tag2 #tag3
+
 ---
 
-# How to answer a survey offline
+## How to answer a survey offline
 
-## Question
+### Question
 
 I want to create a survey, send it to respondents, and give them the option to answer it offline, then save it locally.
 
-## Answer
+### Answer
 
 Use [SurveyJS PDF Generator](https://surveyjs.io/pdf-generator/examples/save-completed-forms-as-pdf-files/reactjs) to export a survey as a fillable PDF.
 
@@ -30,10 +33,10 @@ Once you receive the filled PDF:
 - You can manually enter the answers into your system
 - Or programmatically parse the PDF using tools like: pdf-lib, PDF.js.
 
-#### Tags
-offline, pdf, export, fillable-forms
+#offline #pdf #export #fillable-forms
+
 ---
-# Set countdown for a question
+## Set countdown for a question
 
 ### Question
 How to set a countdown on a certain question? For example, this question needs to be answered in 60 seconds
@@ -135,6 +138,6 @@ survey.onStarted.add((sender, options) => {
 });
 ```
 
-### Tags
-timer, countdown
+#timer #countdown
+
 ---

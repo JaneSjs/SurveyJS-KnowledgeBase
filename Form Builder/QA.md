@@ -1,9 +1,21 @@
-# How to limit a custom component to one instance and make its name read-only
-## Question
+## Entry Title
+
+### Question
+...
+
+### Answer
+...
+
+#tag1 #tag2 #tag3
+
+---
+
+## How to limit a custom component to one instance and make its name read-only
+### Question
 
 Can I add a certain question or a custom component only once and prevent users from changing its name?
 
-## Answer
+### Answer
 
 To ensure that a question can only be added once, implement the [`creator.onQuestionAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onQuestionAdded) function and call the [`creator.toolbox.removeItem(questionType)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#removeItem) function to remove your custom template from a list of available element types. Within the `onQuestionAdded` function, you may also define the name of a newly added question.
 Additionally, if you load an existing survey, check whether the survey contains the specified question entry. If it does, disable the toolbox item.
