@@ -18,7 +18,9 @@ Can I add a certain question or a custom component only once and prevent users f
 ### Answer
 
 To ensure that a question can only be added once, implement the [`creator.onQuestionAdded`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onQuestionAdded) function and call the [`creator.toolbox.removeItem(questionType)`](https://surveyjs.io/survey-creator/documentation/api-reference/questiontoolbox#removeItem) function to remove your custom template from a list of available element types. Within the `onQuestionAdded` function, you may also define the name of a newly added question.
+
 Additionally, if you load an existing survey, check whether the survey contains the specified question entry. If it does, disable the toolbox item.
+
 ```js
 // Disable the toolbox item if the widget already exists when loading
 creator.onSurveyInstanceCreated.add((sender, options) => {
@@ -52,9 +54,15 @@ creator.onElementDeleting.add((sender, options) => {
     }
   }
 });
+creator.JSON = // Load an existing survey
 ```
 To make a question's `name` property read-only, implement the  [`creator.onPropertyGetReadOnly`](https://surveyjs.io/survey-creator/documentation/api-reference/survey-creator#onPropertyGetReadOnly) function.
 
 ```js
+creator.onPropertyGetReadOnly.add((sender, options) => {
+  if(options.property.name === "name" && options.element.getType() === "uniquewidget") {
+    options.readOnly = true;
+  }
+})
 ```
 ---
